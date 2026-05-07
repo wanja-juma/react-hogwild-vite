@@ -1,95 +1,144 @@
-# Hogwild: The React app for fans of prize-winning pigs
+# Hog Project - React Testing Suite
+## Overview
+This is a comprehensive testing suite for a Hog (Pig) Management Application built with React. The tests verify core functionality including displaying hog profiles, filtering, sorting, adding new hogs, and interactive UI features.
 
-Imagine you are tasked with creating an interface for a pig farming competition for your local county fair that will show details about all the pigs who have entered the county fair competition along with their details that will be provided for you in a file. Your app must allow users to filter, sort, and update the displayed hogs while maintaining accessibility and responsiveness.
-To complete this lab, you’ll need to apply your knowledge of component-based design, props, state management, event handling, and conditional rendering.
+## Test Coverage
+The test suite validates the following features:
 
+*** 1. Initial Load Display ***
+Renders a tile/card for each hog from the dataset
 
-## Instructions
-- To run the lab:
-```bash
-npm install
-npm run dev
-```
-- To run the test suite:
-```bash
-npm run test
-```
-- Use the test suite and deliverables below to complete this lab. Be sure not just to 
-pass the tests, but check the desired functionality is working in browser
+Verifies hog names and images are correctly displayed
 
-## Deliverables
+*** 2. Hog Details Expansion ***
+Clicking on a hog tile reveals additional details:
 
-- _When the app first loads_, display a tile for each hog in the
-  `porker_data.js` file. In the tile, display the **name** and **image** for
-  each hog. The name should be in an h3 tag.
-- _When the user clicks on the hog tile_, display the other details about the
-  hog (its **specialty**, **weight**, **greased**, and **highest medal
-  achieved**)
-- Allow the user to _filter_ the hogs that are **greased**
-  - *hint:* The test is expecting a checkbox with an associated label. For this you will
-   need to use the htmlFor property.
-- Allow the user to _sort_ the hogs based on **name** or **weight**
+Specialty
 
-- Create a button with "Hide Me" as the text for each hog card to allow users to _hide_ 
-hogs (not delete them, just hide them from view!)
-- Add a form to allow users to _add_ new hogs to the page
-  - *hint:* The form test also looks for labels, so you'll need htmlFor again.
-- Implement [Semantic Cards](https://semantic-ui.com/views/card.html) for
-  each hog. Each hog card wrapping element (such as a div) will need to be given 
-  an aria-label of "hog card" to be recognized by the test suite. Example below:
-  ```javascript
-    <div aria-label="hog card" className="semantic ui classes go here">
-      // Hog Card elements here
-    </div>
-  ```
+Weight
 
-## Project Guidelines
+Greased status
 
-- Follow
-  [React best practices](https://reactjs.org/docs/thinking-in-react.html) to
-  create components and decide on where state needs to live
-- Pass props down from parent components to children
-- Use inverse data flow and callback functions to pass data up from child
-  components to parents
-- Re-render components by setting state
+Highest medal achieved
 
-## What we have so far
+*** 3. Filtering by Greased Status ***
+Checkbox filter to show only greased pigs
 
-- A file containing all our hog data (`./src/porkers_data.js`) imported into `App.jsx`
-- A `<Nav>` component rendered in our `App.jsx`
+Non-greased pigs are hidden when filter is active
 
-## Trying to figure out where to start?
+*** 4. Sorting Functionality ***
+Sort hogs alphabetically by name
 
-Start by wireframing what you want the app to look like and breaking it up into 
-components.
+Sort hogs numerically by weight
 
-Once you've decided on your components, use the MVP (minimum viable product)
-approach. What's the simplest thing we can render to the page? Perhaps a
-paragraph tag displaying each hog's name? Which components would this involve?
+Dynamic re-rendering of hog list based on sort selection
 
-When building your filter and sort functionalities, consider what you want to
-store in state and where that state should be stored. How can a child component
-pass information up to its parent component? Think about what needs to happen
-upon each index rerender. What if a user filters out un-greased pigs, and then
-wants the remaining pigs sorted by weight?
+*** 5. Hide/Remove Feature ***
+Each hog card has a "Hide Me" button
 
-The test suites will look for specific wording in labels or naming of html element
-attributes. You can take a peek in the test files in you're unsure why the test is 
-not passing but your code looks right in browser. It could be you have an extra space, 
-capitalization is different, or are missing some punctuation.
+Clicking hides that specific hog from the display
 
-Be sure to use good programming practices, such as clear variable names and
-single responsibility functions. React apps can quickly become tangled and hard
-to debug if built without best practices!
+*** 6. Add New Hog via Form ***
+Form inputs for:
 
-## Styling
+Name
 
-We've imported the Semantic CSS library to keep your piggies looking pretty. To
-keep your hogs in columns, make sure their parent container has the class
-`"ui grid container"`. The children in the columns should have class
-`"ui eight wide column"`. (Semantic uses a grid with a default of 16 units wide,
-so 8-wide will make two columns and 4-wide will make 4 columns.)
+Weight
 
-Semantic will take care of assigning the columns for you. You can also try
-implementing [Semantic Cards](https://semantic-ui.com/views/card.html) for each
-hog.
+Specialty
+
+Greased (checkbox)
+
+Submitting the form adds the new hog to the grid
+
+*** 7. UI Component Structure ***
+Hog tiles use Semantic UI Card components
+
+Each card has the classes: "ui" and "card"
+
+Proper ARIA labeling for accessibility
+### Technologies Used
+Testing Library: React Testing Library
+
+Test Runner: Jest (presumed)
+
+UI Framework: Semantic UI React
+
+Language: JavaScript/React
+
+### File Structure
+text
+src/
+├── components/
+│   └── App.js          # Main application component
+├── porkers_data.js      # Hog dataset
+└── __tests__/
+    └── App.test.js      # This test suite
+### Running the Tests
+bash
+### Run all tests
+npm test
+
+### Run with watch mode
+npm test -- --watch
+
+### Run specific test file
+npm test App.test.js
+*** Expected Test Outcomes ***
+All tests should pass when the React application correctly implements:
+
+Hog data mapping to Semantic UI Cards
+
+Toggle functionality for details view
+
+Greased status filtering
+
+Name/weight sorting logic
+
+Hide/remove state management
+
+Form submission handler
+
+### Data Structure (hogs)
+Each hog object in porkers_data.js should contain:
+
+javascript
+{
+  name: string,
+  image: string,
+  specialty: string,
+  weight: number,
+  greased: boolean,
+  "highest medal achieved": string
+}
+### Component Requirements
+To pass these tests, your <App /> component must provide:
+
+A filter checkbox with label "Greased Pigs Only?"
+
+A sort dropdown with label "Sort by:" and options "name" and "weight"
+
+A form with inputs labeled "Name:", "Weight:", "Specialty:", "Greased?"
+
+Each hog card with:
+
+A heading (level 3) containing the hog's name
+
+An image with alt text "Photo of {hog name}"
+
+A button labeled "Hide Me"
+
+Additional details shown/hidden on click
+
+ARIA label "hog card" on each card container
+
+### Debugging Tips
+If tests fail:
+
+Check that Semantic UI CSS is properly imported
+
+Verify event handlers are correctly attached
+
+Ensure state updates trigger re-renders
+
+Confirm unique keys are used for list items
